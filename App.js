@@ -13,6 +13,7 @@ import WasteReportScreen from './src/screens/WasteReportScreen';
 import WorkerAssignmentsScreen from './src/screens/WorkerAssignmentsScreen';
 import AssignmentDetailScreen from './src/screens/AssignmentDetails';
 import RegisterScreen from './src/screens/RegisterScreen';
+import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
 
 const Stack = createStackNavigator();
 
@@ -47,7 +48,12 @@ export default function App() {
 <Stack.Screen 
           name="Register" 
           component={RegisterScreen} 
-        />    
+        /> 
+        <Stack.Screen 
+  name="AdminDashboard" 
+  component={AdminDashboardScreen}
+  options={{ headerShown: false }}
+/>   
       </Stack.Navigator>
     </NavigationContainer>
   );

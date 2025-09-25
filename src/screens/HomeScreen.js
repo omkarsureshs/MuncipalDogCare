@@ -67,7 +67,38 @@ const HomeScreen = ({ navigation, route }) => {
   };
 
   const config = roleConfig[user.role];
-
+// Add this function in HomeScreen.js after the config declaration
+const handleFeaturePress = ({ icon, title, desc }) => {
+  switch (title) {
+    case 'Issue Map':
+      // Navigate to map screen when you have it
+      Alert.alert('Coming Soon', 'Issue map feature will be available soon');
+      break;
+    case 'Notifications':
+      Alert.alert('Notifications', 'No new notifications');
+      break;
+    case 'Feedback':
+      Alert.alert('Feedback', 'Send us your feedback');
+      break;
+    case 'Help':
+      Alert.alert('Help', 'Contact support for assistance');
+      break;
+    case 'Navigation':
+      Alert.alert('Navigation', 'GPS navigation feature');
+      break;
+    case 'Update Status':
+      Alert.alert('Update Status', 'Mark tasks as completed');
+      break;
+    case 'User Management':
+      Alert.alert('User Management', 'Manage users and roles');
+      break;
+    case 'Analytics':
+      Alert.alert('Analytics', 'View system statistics');
+      break;
+    default:
+      Alert.alert(title, desc);
+  }
+};
   const handleLogout = () => {
     Alert.alert('Sign Out', 'Are you sure you want to sign out?', [
       { text: 'Cancel', style: 'cancel' },
@@ -137,28 +168,29 @@ const HomeScreen = ({ navigation, route }) => {
         </View>
       </LinearGradient>
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Primary Action */}
-<TouchableOpacity
-  style={styles.primaryAction}
-  onPress={() => {
-    if (user.role === 'USER') {
-      navigation.navigate('Complaint'); // Navigate to report issues screen
-    } else if (user.role === 'WORKER') {
-      navigation.navigate('WorkerAssignments'); // Navigate to assignments screen
-    } else if (user.role === 'ADMIN') {
-      navigation.navigate('AdminDashboard'); // Navigate to admin dashboard
-    } else {
-      Alert.alert('Error', 'Invalid user role!');
-    }
-  }}
->
-  <View style={styles.primaryActionIcon}>
-    <Feather name={config.primaryIcon} size={22} color="#E1994D" />
-  </View>
-  <Text style={styles.primaryActionText}>{config.primaryAction}</Text>
-  <Feather name="chevron-right" size={18} color="#a0aec0" />
-</TouchableOpacity>
+        <TouchableOpacity
+          style={styles.primaryAction}
+          onPress={() => {
+            if (user.role === 'USER') {
+              navigation.navigate('Complaint');
+            } else if (user.role === 'WORKER') {
+              navigation.navigate('WorkerAssignments');
+            } else if (user.role === 'ADMIN') {
+              navigation.navigate('AdminDashboard');
+            } else {
+              Alert.alert('Error', 'Invalid user role!');
+            }
+          }}
+        >
+          <View style={styles.primaryActionIcon}>
+            <Feather name={config.primaryIcon} size={22} color="#E1994D" />
+          </View>
+          <Text style={styles.primaryActionText}>{config.primaryAction}</Text>
+          <Feather name="chevron-right" size={18} color="#a0aec0" />
+        </TouchableOpacity>
+
         {/* Stats Overview */}
         <View style={styles.statsSection}>
           <Text style={styles.sectionTitle}>Overview</Text>
@@ -172,17 +204,12 @@ const HomeScreen = ({ navigation, route }) => {
         {/* Auto-scrolling Features */}
         <View style={styles.featuresSection}>
           <Text style={styles.sectionTitle}>Quick Access</Text>
-          <FlatList
-            ref={scrollRef}
-            data={config.features}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => <FeatureCard {...item} />}
-            showsVerticalScrollIndicator={false}
-            style={{ maxHeight: 200 }}
-          />
+          <View style={styles.featuresContainer}>
+            {config.features.map((item, index) => (
+              <FeatureCard key={index} {...item} />
+            ))}
+          </View>
         </View>
-
-        {/* Role-specific content */}
         <View style={styles.roleSection}>
           <Text style={styles.sectionTitle}>
             {user.role === 'USER' && 'Community Issues'}
@@ -298,6 +325,9 @@ const styles = StyleSheet.create({
   featureContent: { flex: 1 },
   featureTitle: { fontSize: 14, fontWeight: '600', color: '#2d3748', marginBottom: 2 },
   featureDesc: { fontSize: 11, color: '#718096' },
+  featuresContainer: {
+  maxHeight: 200,
+},
   roleSection: { paddingHorizontal: 24, marginBottom: 40 },
   roleContent: {
     backgroundColor: '#ffffff',
