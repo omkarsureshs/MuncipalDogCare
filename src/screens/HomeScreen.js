@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation, route }) => {
         { icon: 'map-pin', title: 'Issue Map', desc: 'View issues in your area' },
         { icon: 'bell', title: 'Notifications', desc: 'Get status updates' },
         { icon: 'message-square', title: 'Feedback', desc: 'Send feedback' },
-        { icon: 'info', title: 'Help', desc: 'Get app support' },
+       // { icon: 'info', title: 'Help', desc: 'Get app support' },
       ],
     },
     WORKER: {
