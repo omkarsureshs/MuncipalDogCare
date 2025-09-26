@@ -52,14 +52,25 @@ const LoginScreen = ({ navigation, route }) => {
     setTimeout(() => {
       setLoading(false);
       const creds = demoCredentials[selectedRole];
+
       if (username === creds.username && password === creds.password) {
-        navigation.replace('Home', {
-          user: {
-            username,
-            role: selectedRole,
-            name: `${roles[selectedRole].name} User`,
-          },
-        });
+        if (selectedRole === 'ADMIN') {
+          navigation.replace('AdminDashboard', {
+            admin: {
+              username,
+              role: selectedRole,
+              name: `${roles[selectedRole].name} User`,
+            },
+          });
+        } else {
+          navigation.replace('Home', {
+            user: {
+              username,
+              role: selectedRole,
+              name: `${roles[selectedRole].name} User`,
+            },
+          });
+        }
       } else {
         Alert.alert('Login Failed', 'Invalid credentials for the selected role');
       }
