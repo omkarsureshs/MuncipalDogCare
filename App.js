@@ -13,7 +13,14 @@ import WasteReportScreen from './src/screens/WasteReportScreen';
 import WorkerAssignmentsScreen from './src/screens/WorkerAssignmentsScreen';
 import AssignmentDetailScreen from './src/screens/AssignmentDetails';
 import RegisterScreen from './src/screens/RegisterScreen';
+<<<<<<< HEAD
 import AdminDashboardScreen from './src/screens/AdminDashboardScreen';
+=======
+import AdminDashboard from './src/screens/AdminDashboard';
+import AnalyticsScreen from './src/screens/AnalyticsScreen';
+import SystemUsersScreen from './src/screens/SystemUsersScreen';
+import ReportsScreen from './src/screens/ReportsScreen';
+>>>>>>> 547f4e4 (Updated App.js and package files)
 
 const Stack = createStackNavigator();
 
@@ -48,12 +55,36 @@ export default function App() {
 <Stack.Screen 
           name="Register" 
           component={RegisterScreen} 
+<<<<<<< HEAD
         /> 
         <Stack.Screen 
   name="AdminDashboard" 
   component={AdminDashboardScreen}
   options={{ headerShown: false }}
 />   
+=======
+        />  
+        <Stack.Screen 
+          name="AdminDashboard" 
+          component={AdminDashboard} 
+          options={{ headerShown: false }}
+        />  
+       <Stack.Screen name="AnalyticsScreen" component={AnalyticsScreen} />
+       <Stack.Screen 
+        name="SystemUsers" 
+        component={SystemUsersScreen} 
+        options={{ headerShown: false }} 
+      />
+      <Stack.Screen 
+      name="ReportsScreen" 
+      component={ReportsScreen} 
+       options={{ headerShown: false }} 
+      />
+
+
+
+
+>>>>>>> 547f4e4 (Updated App.js and package files)
       </Stack.Navigator>
     </NavigationContainer>
   );
